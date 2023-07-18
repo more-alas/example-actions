@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          apt-get update
+          apt update
           apt-get install nodejs npm
           npm install -g @brightsec/cli --unsafe-perm=true
           apt-get install jq -y 
