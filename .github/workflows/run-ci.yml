@@ -20,8 +20,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          apt update
-          apt-get install nodejs npm
+          apt update -qq --fix-missing
+          apt install -y --no-install-recommends nodejs npm make g++
           npm install -g @brightsec/cli --unsafe-perm=true
           apt-get install jq -y 
           apt-get install curl -y
