@@ -43,6 +43,7 @@ jobs:
         run: |
           POLLING_RESULT=$(bright-cli scan:polling  --interval 30s   --timeout 10m --token ${{ secrets.BRIGHT_TOKEN }} --breakpoint high_issue $SCAN_ID  --cluster demo.brightsec.com)
           echo $POLLING_RESULT
+          echo "POLLING_RESULT=$POLLING_RESULT" >> $GITHUB_ENV
       - name: Stop Scan 🛑
         continue-on-error: true
         if: ${{ always() }}
