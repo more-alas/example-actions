@@ -34,15 +34,13 @@ jobs:
       - name: Start Brightsec Scan 🏁
         id: start
         run: |
-          SCAN_ID=$(bright-cli scan:run                                                 \
-            --test csrf dom_xss header_security secret_tokens open_buckets excess_data_exposure \                
-            --name "💎 Local GH BrokenCrystals for a '${GITHUB_REF##*/}' branch #${GITHUB_RUN_NUMBER}" \
+          SCAN_ID=$(bright-cli scan:run --token ${{ secrets.BRIGHT_TOKEN }} --name "💎 Local GH BrokenCrystals for a '${GITHUB_REF##*/}' branch #${GITHUB_RUN_NUMBER}" \
+            --test csrf dom_xss header_security secret_tokens open_buckets excess_data_exposure \  
             --crawler http://10.0.0.170:8090/api/config http://10.0.0.170:8090/  \
             --host-filter 10.0.0.170:8090                                 \
             --repeater ${{ secrets.REPEATER5 }}                           \
             --auth ${{ secrets.BC_LESSB_AUTH5 }}                          \ 
             --project ${{ secrets.PROJECT5 }}                             \
-            --token ${{ secrets.BRIGHT_TOKEN }}                          \
             --cluster demo.brightsec.com)
           echo "SCAN_ID=$SCAN_ID" >> $GITHUB_ENV
       - name: Get the output scan url 🔗
