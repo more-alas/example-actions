@@ -30,12 +30,12 @@ jobs:
         run: |
           printf "BRIGHT_TOKEN=${{ secrets.BRIGHT_TOKEN }}\nREPEATER5=${{ secrets.REPEATER5 }}\nPROJECT5=${{ secrets.PROJECT5 }}\nBC_LESSB_AUTH5=${{ secrets.BC_LESSB_AUTH5 }}" > .env
           cat .env
-      - run: sleep 30s
+      - run: sleep 3s
       - name: Start Brightsec Scan 🏁
         id: start
         run: |
           SCAN_ID=$(bright-cli scan:run --token ${{ secrets.BRIGHT_TOKEN }} --name "💎 Local GH BrokenCrystals for a '${GITHUB_REF##*/}' branch #${GITHUB_RUN_NUMBER}" \
-            --test csrf dom_xss header_security secret_tokens open_buckets excess_data_exposure \  
+            --test csrf dom_xss header_security secret_tokens open_buckets excessive_data_exposure \  
             --crawler http://10.0.0.170:8090/api/config http://10.0.0.170:8090/  \
             --host-filter 10.0.0.170:8090                                 \
             --repeater ${{ secrets.REPEATER5 }}                           \
