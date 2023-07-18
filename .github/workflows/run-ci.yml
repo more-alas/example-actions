@@ -46,7 +46,8 @@ jobs:
             --repeater ${{ secrets.REPEATER5 }}                           \
             --auth ${{ secrets.BC_LESSB_AUTH5 }}                          \ 
             --project ${{ secrets.PROJECT5 }}                             \
-            --token ${{ secrets.NEXPLOIT_TOKEN }})                        
+            --token ${{ secrets.BRIGHT_TOKEN }}                          \
+            --cluster demo.brightsec.com)
           echo "SCAN_ID=$SCAN_ID" >> $GITHUB_ENV
       - name: Get the output scan url 🔗
         run: |
@@ -57,8 +58,9 @@ jobs:
             --interval 30s                        \
             --timeout 10m                         \
             --token ${{ secrets.BRIGHT_TOKEN5 }}  \
-            --breakpoint high_issue $SCAN_ID
+            --breakpoint high_issue $SCAN_ID      \
+            --cluster demo.brightsec.com
       - name: Stop Scan 🛑
         continue-on-error: true
         if: ${{ always() }}
-        run: bright-cli scan:stop --token ${{ secrets.BRIGHT_TOKEN5 }} $SCAN_ID
+        run: bright-cli scan:stop --token ${{ secrets.BRIGHT_TOKEN5 }} $SCAN_ID --cluster demo.brightsec.com
