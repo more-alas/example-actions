@@ -15,19 +15,22 @@ on:
 jobs:
   start_and_wait_scan:
     runs-on: ubuntu-20.04
-    name: A job to run a Nexploit scan
+    container: node:16
+    name: A job to run a BrightSec scan
     steps:
       - uses: actions/checkout@v2
       - run: |
           sudo apt update
           sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
-          sudo apt-get install nodejs-dev node-gyp libssl1.0-dev
           sudo apt-get install nodejs npm
           sudo npm install -g @brightsec/cli --unsafe-perm=true
+          sudo apt-get install jq -y 
+          sudo apt-get install curl -y
+          
       - name: Save environment variables
         run: |
-          printf "BRIGHT_TOKEN=${{ secrets.BRIGHT_TOKEN }}\nREPEATER=${{ secrets.REPEATER5 }}\n" > .env
+          printf "BRIGHT_TOKEN=${{ secrets.BRIGHT_TOKEN }}\nREPEATER5=${{ secrets.REPEATER5 }}\nPROJECT5=${{ secrets.PROJECT5 }}\nBC_LESSB_AUTH5=${{ secrets.BC_LESSB_AUTH5 }}" > .env
           cat .env
       - name: Docker-Compose
         run: |
@@ -51,7 +54,7 @@ jobs:
           echo "SCAN_ID=$SCAN_ID" >> $GITHUB_ENV
       - name: Get the output scan url 🔗
         run: |
-          printf "Scan was started with ID https://app.brightsec.com/scans/$SCAN_ID"
+          printf "Scan was started, check details at https://app.brightsec.com/scans/$SCAN_ID"
       - name: Wait for issues ⏳
         run: |
           bright-cli scan:polling                 \
