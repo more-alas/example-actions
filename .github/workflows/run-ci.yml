@@ -38,7 +38,7 @@ jobs:
           echo "SCAN_ID=$SCAN_ID" >> $GITHUB_ENV
       - name: Get the output scan url 🔗
         run: |
-          printf "Scan was started, check details at https://app.brightsec.com/scans/$SCAN_ID"
+          printf "Scan was started, check the details at https://app.brightsec.com/scans/$SCAN_ID"
       - name: Wait for issues ⏳
         run: |
           bright-cli scan:polling                 \
