@@ -26,7 +26,6 @@ jobs:
           npm install -g @brightsec/cli --unsafe-perm=true
           apt-get install jq -y 
           apt-get install curl -y
-          
       - name: Save environment variables
         run: |
           printf "BRIGHT_TOKEN=${{ secrets.BRIGHT_TOKEN }}\nREPEATER5=${{ secrets.REPEATER5 }}\nPROJECT5=${{ secrets.PROJECT5 }}\nBC_LESSB_AUTH5=${{ secrets.BC_LESSB_AUTH5 }}" > .env
