@@ -49,5 +49,4 @@ jobs:
       - name: Stop Scan 🛑
         continue-on-error: true
         if: $POLLING_RESULT == "Stop"
-        run: | 
-          bright-cli scan:stop --token ${{ secrets.BRIGHT_TOKEN }} $SCAN_ID --cluster demo.brightsec.com
+        run: bright-cli scan:stop --token ${{ secrets.BRIGHT_TOKEN }} $SCAN_ID --cluster demo.brightsec.com
