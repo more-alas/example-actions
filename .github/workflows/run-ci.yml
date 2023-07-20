@@ -45,7 +45,7 @@ jobs:
           echo "POLLING_RESULT=$POLLING_RESULT" >> $GITHUB_ENV
       - name: Stop Scan 🛑
         continue-on-error: true
-        if: ${{ Always() }}
+        if: ${{ failure() }}
         run: |
           printf "Polling result was $POLLING_RESULT"
           bright-cli scan:stop --token ${{ secrets.BRIGHT_TOKEN }} $SCAN_ID --cluster demo.brightsec.com
