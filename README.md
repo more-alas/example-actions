@@ -4,7 +4,7 @@
 2. Set `NEXPLOIT_TOKEN` and `REPEATER` secrets in your repo settings.
 3. Run a CI job in Actions.
 4. Go to Nexploit app and check if a scan started.
-Bob?
+Bob? bob.
 
 
 More Bob? Yet more.
