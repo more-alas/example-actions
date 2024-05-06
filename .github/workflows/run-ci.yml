@@ -8,7 +8,7 @@ on:
       - swagger
       - brokencrystals
   pull_request:
-    branches: [main]
+    branches: [With-Actions]
   schedule:
     - cron: "0 0 * * THU"
 
