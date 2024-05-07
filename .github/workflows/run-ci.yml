@@ -25,8 +25,9 @@ jobs:
         with:
           api_token: ${{ secrets.BRIGHT_TOKEN}}
           hostname: app.brightsec.com
-          name: Bright Actions Scan - ${{ github.sha }}
+          name: Project 32 Bright Actions Scan - ${{ github.sha }}
           discovery_types: |
             [ "crawler" ]
           crawler_urls: |
             [ "https://brokencrystals.com" ]
+          project_id: ePB48tZH3KeGRHE6N2skAb
