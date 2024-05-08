@@ -25,9 +25,20 @@ jobs:
         with:
           api_token: ${{ secrets.BRIGHT_TOKEN}}
           hostname: app.brightsec.com
-          name: Project 32 Bright Actions Scan - ${{ github.sha }}
+          name: Project 32 Bright Actions Scan With Pipeline Wait1 - ${{ github.sha }}
           discovery_types: |
             [ "crawler" ]
           crawler_urls: |
             [ "https://brokencrystals.com" ]
-          project_id: ePB48tZH3KeGRHE6N2skAb
+          project_id: "ePB48tZH3KeGRHE6N2skAb"
+      - name: Wait for breakpoint
+        id: wait
+        uses: NeuraLegion/wait-for@release
+        with:
+          api_token:  ${{ secrets.BRIGHT_TOKEN }}
+          hostname: app.brightsec.com
+          scan: ${{ steps.start.outputs.id }}
+          wait_for: critical
+          code_scanning_alerts: true
+          github_token: ${{ secrets.ACTION_GITHUB_TOKEN }}
+          timeout: 600 # time in seconds
